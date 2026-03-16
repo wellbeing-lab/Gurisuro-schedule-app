@@ -8,9 +8,13 @@ Green Slow Mobility の運転手・添乗員スケジュール管理アプリ
 
 GitHub  
 wellbeing-lab/Gurisuro-schedule-app  
+
 ↓  
+
 Vercel（アプリ公開）  
+
 ↓  
+
 Neon（PostgreSQL Database）
 
 ---
@@ -55,6 +59,7 @@ wellbeing-lab/Gurisuro-schedule-app
 デプロイ後、公開URLが発行される
 
 例  
+
 https://gurisuro-schedule-app.vercel.app
 
 ---
@@ -110,19 +115,17 @@ postgresql://xxxxx
 
 旧データベースからエクスポート
 
-pg_dump "旧DATABASE_URL" > backup.sql
+pg_dump "OLD_DATABASE_URL" > backup.sql
 
 新データベースへインポート
 
-psql "新DATABASE_URL" < backup.sql
+psql "NEW_DATABASE_URL" < backup.sql
 
 ---
 
 ## 再デプロイ
 
-Vercel
-
-Redeploy
+Vercel → Redeploy  
 
 または
 
@@ -145,27 +148,28 @@ Neon
 DATABASE_URL は GitHub に含めない  
 環境変数は Vercel に設定する
 
+---
+
 ## Neonバックアップ手順
 
-1. Neon Console の Connect から Connection pooling を OFF にする
-2. unpooled connection string をコピーする
-3. 以下を実行する
+1. Neon Console の Connect から **Connection pooling を OFF** にする  
+2. unpooled connection string をコピーする  
+3. 以下を実行する  
 
-```bash
 pg_dump -Fc -v -d "OLD_DATABASE_URL_UNPOOLED" -f backup.dump
+
+---
 
 ## Neon データベース復元方法
 
 新しい Neon プロジェクトを作成した後、バックアップデータを復元する。
-
----
 
 ### 1. 新しい Neon プロジェクト作成
 
 Neon Console  
 https://console.neon.tech
 
-「Create Project」を選択してデータベースを作成する。
+Create Project を選択
 
 例
 
@@ -181,9 +185,7 @@ neondb
 
 Neon Console → Connect
 
-Connection pooling を **OFF** にする。
-
-表示された接続文字列をコピーする。
+Connection pooling を **OFF** にする
 
 例
 
@@ -192,8 +194,6 @@ postgresql://user:password@ep-xxxx.neon.tech/neondb
 ---
 
 ### 3. バックアップデータを復元
-
-以下のコマンドを実行
 
 pg_restore -v -d "NEW_DATABASE_URL" backup.dump
 
@@ -210,7 +210,7 @@ Vercel Project
 Settings  
 Environment Variables  
 
-以下を更新
+更新
 
 DATABASE_URL
 
@@ -222,7 +222,8 @@ postgresql://user:password@ep-xxxx.neon.tech/neondb
 
 ### 5. 再デプロイ
 
-Vercel で Redeploy  
+Vercel → Redeploy  
+
 または
 
 git push
@@ -237,4 +238,7 @@ Vercel
 ↓  
 Neon
 
-Neon データベースのバックアップは backup.dump として保存している。
+---
+
+Neon データベースのバックアップは  
+backup.dump として保存する。
