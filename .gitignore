@@ -22,3 +22,5 @@ server/database.sqlite
 
 # 作業用
 .git_backup/
+backup.dump
+backup.dump
