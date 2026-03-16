@@ -236,3 +236,5 @@ GitHub
 Vercel  
 ↓  
 Neon
+
+Neon データベースのバックアップは backup.dump として保存している。
