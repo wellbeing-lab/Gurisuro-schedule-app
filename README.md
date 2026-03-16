@@ -144,3 +144,12 @@ Neon
 
 DATABASE_URL は GitHub に含めない  
 環境変数は Vercel に設定する
+
+## Neonバックアップ手順
+
+1. Neon Console の Connect から Connection pooling を OFF にする
+2. unpooled connection string をコピーする
+3. 以下を実行する
+
+```bash
+pg_dump -Fc -v -d "OLD_DATABASE_URL_UNPOOLED" -f backup.dump
